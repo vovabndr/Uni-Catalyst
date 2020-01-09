@@ -8,7 +8,6 @@
 
 import Foundation
 
-// MARK: - WelcomeElement
 struct TResponse: Codable, Identifiable {
   let id: Int
   let bookNo, note: String

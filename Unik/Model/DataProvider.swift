@@ -11,7 +11,7 @@ import Combine
 
 final class DataProvider: ObservableObject {
   private var cancellables = Set<AnyCancellable>()
-  static let baseURL = "http://localhost:5001/api/v2/"
+  private static let baseURL = "http://localhost:5001/api/v2/"
 
   @Published var fResponse: [FResponse] = []
   @Published var sResponse: [SResponse] = []

@@ -6,9 +6,7 @@
 //  Copyright © 2020 Volodymyr Bondar. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
-import Combine
 
 struct ContentView: View {
   @ObservedObject private var provider = DataProvider()
@@ -27,7 +25,8 @@ struct ContentView: View {
           Text("Enter group: ")
           TextField("", text: $groupName, onCommit: {
             self.provider.get1(groupName: self.groupName)
-          }).textFieldStyle(RoundedBorderTextFieldStyle())
+          })
+            .textFieldStyle(RoundedBorderTextFieldStyle())
         }
         .padding(8)
         List {
