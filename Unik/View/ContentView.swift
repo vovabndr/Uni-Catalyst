@@ -18,7 +18,7 @@ struct ContentView: View {
   var body: some View {
     TabView {
       VStack {
-        Text(#"Вивести студентів групи ІК-62, які навчаються на спеціальності "Автоматизація" на кафедрі "Технічна Кібернетика", які є киянами"#)
+        Text(#"Вивести студентів групи ІК-62, які навчаються на спеціальності "Автоматизація" на кафедрі "Технічна Кібернетика", які є киянами."#)
           .padding(8)
           .font(.largeTitle)
         List {
@@ -54,7 +54,7 @@ struct ContentView: View {
       }
 
       VStack {
-        Text(#"Вивести студентів, які скоїли певні правопорушення та потрапили до наказу на відрахування"#)
+        Text(#"Вивести студентів, які скоїли певні правопорушення та потрапили до наказу на відрахування."#)
           .padding(8)
           .font(.largeTitle)
         List {
@@ -62,8 +62,8 @@ struct ContentView: View {
             header: HStack {
               Text("Name").frame(width: self.width)
               Text("Surame").frame(width: self.width)
-              Text("violationKindName").frame(width: self.width)
-              Text("orderKindName").frame(width: self.width)
+              Text("Violation Kind Name").frame(width: self.width)
+              Text("Order Kind Name").frame(width: self.width)
             }
           ) {
             ForEach(provider.sResponse) { (res: SResponse) in
@@ -83,11 +83,36 @@ struct ContentView: View {
         Text("Second")
       }
 
-      Text("The Last Tab")
-        .onAppear(perform: self.provider.get3)
-        .tabItem {
-          Image(systemName: "3.square.fill")
-          Text("Third")
+      VStack {
+        Text(#"Вивести ПІБ студентів контрактників з індівідуальним контрактом, що мають певні привілеї."#)
+          .padding(8)
+          .font(.largeTitle)
+        List {
+          Section(
+            header: HStack {
+              Text("Name").frame(width: self.width)
+              Text("Surame").frame(width: self.width)
+              Text("Patronymic").frame(width: self.width)
+              Text("Сontract Kind Name").frame(width: self.width)
+              Text("Privilege Name").frame(width: self.width)
+            }
+          ) {
+            ForEach(provider.tResponse) { (res: TResponse) in
+              HStack {
+                Text(res.person.name).frame(width: self.width)
+                Text(res.person.surname).frame(width: self.width)
+                Text(res.person.patronymic).frame(width: self.width)
+                Text(res.contracts[0].contractKind.contractKindName ?? "").frame(width: self.width)
+                Text(res.person.personPrivileges[0].privilege.privilegeName ?? "").frame(width: self.width)
+              }
+            }
+          }
+        }
+      }
+      .onAppear(perform: self.provider.get3)
+      .tabItem {
+        Image(systemName: "3.square.fill")
+        Text("Third")
       }
     }
     .font(.headline)
