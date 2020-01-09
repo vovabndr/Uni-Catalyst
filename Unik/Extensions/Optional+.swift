@@ -9,7 +9,7 @@
 import Foundation
 
 extension Optional {
-  func on(work: (Wrapped) -> Void) -> Wrapped?  {
+  func on(work: (Wrapped) -> Void) -> Wrapped? {
     if let value = self {
       work(value)
     }
