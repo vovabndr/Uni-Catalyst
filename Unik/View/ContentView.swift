@@ -11,16 +11,25 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
-  @ObservedObject
-  private var provider = DataProvider()
+  @ObservedObject private var provider = DataProvider()
+  @State private var groupName = "IK-62"
+
   private let width: CGFloat = 175
 
   var body: some View {
     TabView {
       VStack {
-        Text(#"Вивести студентів групи ІК-62, які навчаються на спеціальності "Автоматизація" на кафедрі "Технічна Кібернетика", які є киянами."#)
+        Text(#"Вивести студентів групи \#(self.groupName), які навчаються на спеціальності "Автоматизація" на кафедрі "Технічна Кібернетика", які є киянами."#)
           .padding(8)
           .font(.largeTitle)
+
+        HStack {
+          Text("Enter group: ")
+          TextField("", text: $groupName, onCommit: {
+            self.provider.get1(groupName: self.groupName)
+          }).textFieldStyle(RoundedBorderTextFieldStyle())
+        }
+        .padding(8)
         List {
           Section(
             header: HStack {
@@ -47,7 +56,7 @@ struct ContentView: View {
           }
         }
       }
-      .onAppear(perform: self.provider.get1)
+      .onAppear { self.provider.get1() }
       .tabItem {
         Image(systemName: "1.square.fill")
         Text("First")

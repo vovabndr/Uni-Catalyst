@@ -17,9 +17,10 @@ final class DataProvider: ObservableObject {
   @Published var sResponse: [SResponse] = []
   @Published var tResponse: [TResponse] = []
 
-  func get1() {
-    let url = URL(string: DataProvider.baseURL + "1")!
-    get(url, set: \.fResponse)
+  func get1(groupName: String = "IK-62") {
+    if let url = URL(string: DataProvider.baseURL + "1?groupCode=\(groupName)") {
+      get(url, set: \.fResponse)
+    }
   }
 
   func get2() {
