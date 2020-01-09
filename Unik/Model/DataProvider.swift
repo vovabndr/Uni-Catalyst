@@ -19,20 +19,20 @@ final class DataProvider: ObservableObject {
 
   func get1() {
     let url = URL(string: DataProvider.baseURL + "1")!
-    get(url: url, of: FResponse.self, by: \.fResponse)
+    get(url, set: \.fResponse)
   }
 
   func get2() {
     let url = URL(string: DataProvider.baseURL + "2")!
-    get(url: url, of: SResponse.self, by: \.sResponse)
+    get(url, set: \.sResponse)
   }
 
   func get3() {
     let url = URL(string: DataProvider.baseURL + "3")!
-    get(url: url, of: TResponse.self, by: \.tResponse)
+    get(url, set: \.tResponse)
   }
 
-  private func get<JSON>(url: URL, of type: JSON.Type, by keyPath: ReferenceWritableKeyPath<DataProvider, [JSON]>) where JSON: Decodable {
+  private func get<JSON>(_ url: URL, set keyPath: ReferenceWritableKeyPath<DataProvider, [JSON]>) where JSON: Decodable {
     URLSession.shared.dataTaskPublisher(for: url)
       .map(\.data)
       .decode(type: [JSON].self, decoder: JSONDecoder())
