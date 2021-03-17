@@ -14,6 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: xcodebuild build -destination "platform=iOS Simulator,name=IPhone 12"
+      run: xcodebuild build -destination "platform=iOS Simulator,name=IPhone 12" -allowProvisioningUpdates
 #     - name: Run tests
 #       run: swift test -v
